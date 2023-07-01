@@ -5,7 +5,7 @@ const {
    createExercise,
    getAllExercises,
    getExercisesByDate, 
-} = require('../controllers/exercises')
+} = require('../controllers/exercisesController')
 
 
 router.route('/').post(createExercise)

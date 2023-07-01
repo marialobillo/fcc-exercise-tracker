@@ -4,7 +4,7 @@ const router = express.Router()
 const {
     getAllUsers,
     createUser,
-} = require('../controllers/users')
+} = require('../controllers/usersController')
 
 router.route('/').get(getAllUsers)
 router.route('/').post(createUser)

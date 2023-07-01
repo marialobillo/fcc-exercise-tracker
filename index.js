@@ -4,9 +4,16 @@ const cors = require('cors')
 const port = 3000
 require('dotenv').config()
 
+const usersRouter = require('./src/routes/users')
+//const exercisesRouter = require('./src/routes/exercises')
+
 app.use(cors())
 app.use(express.static('public'))
 
+
+// routes
+app.use('/api/users', usersRouter)
+//app.use('/api/exercises', exercisesRouter)
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
