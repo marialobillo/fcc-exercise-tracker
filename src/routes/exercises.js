@@ -8,8 +8,8 @@ const {
 } = require('../controllers/exercisesController')
 
 
-router.route('/').post(createExercise)
-router.route('/').get(getAllExercises)
+router.route('/:id/exercises').post(createExercise)
+router.route('/:id/exercises').get(getAllExercises)
 router.route('/:id/exercises/:date').get(getExercisesByDate)
 
 module.exports = router

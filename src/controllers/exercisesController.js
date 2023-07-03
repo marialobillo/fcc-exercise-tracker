@@ -11,3 +11,9 @@ const createExercise = (req, res) => {
 const getExercisesByDate = (req, res) => {
     res.send('Get exercises by date')
 }
+
+module.exports = {
+    getAllExercises,
+    createExercise,
+    getExercisesByDate,
+}
