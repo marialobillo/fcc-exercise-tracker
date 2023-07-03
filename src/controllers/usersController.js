@@ -10,8 +10,14 @@ const getAllUsers = async (req, res) => {
     }
 }
 
-const createUser = (req, res) => {
-    res.send('Create user')
+const createUser = async (req, res) => {
+    try {
+        const user = await UserModel.create(req.body)
+        res.status(201).json({ user })
+    } catch (error) {  
+        console.log(error)
+        res.status(500).json({ error })
+    }
 }
 
 module.exports = {
