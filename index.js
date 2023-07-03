@@ -10,7 +10,7 @@ const exercisesRouter = require('./src/routes/exercises')
 
 app.use(cors())
 app.use(express.static('public'))
-
+app.use(express.json())
 
 // routes
 app.use('/api/users', usersRouter)
