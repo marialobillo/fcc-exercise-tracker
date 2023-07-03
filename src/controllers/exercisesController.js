@@ -35,8 +35,28 @@ const createExercise = async (req, res) => {
     }
 }
 
-const getExercisesByDate = (req, res) => {
-    res.send('Get exercises by date')
+const getExercisesByDate = async (req, res) => {
+    try {
+        const { id, date } = req.params;
+        const user = await UserModel.findOne({ _id: id })
+        const dates = date.split('-to-');
+        const exercises = await ExerciseModel.find({
+            username: user.username,
+            date: {
+                $gte: dates[0],
+                $lte: dates[1],
+            }
+        }).select('description duration date');
+        res.json({
+            username: user.username,
+            count: exercises.length,
+            _id: user.id,
+            log: exercises,
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error })
+    }
 }
 
 module.exports = {
