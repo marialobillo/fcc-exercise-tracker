@@ -10,6 +10,6 @@ const {
 
 router.route('/').post(createExercise)
 router.route('/').get(getAllExercises)
-router.route('/:date').get(getExercisesByDate)
+router.route('/:id/exercises/:date').get(getExercisesByDate)
 
 module.exports = router

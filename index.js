@@ -13,7 +13,7 @@ app.use(express.static('public'))
 
 // routes
 app.use('/api/users', usersRouter)
-//app.use('/api/exercises', exercisesRouter)
+app.use('/api/users', exercisesRouter)
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
