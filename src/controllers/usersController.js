@@ -1,7 +1,12 @@
 const UserModel = require('../models/User');
 
-const getAllUsers = (req, res) => {
-    res.send('Get all users')
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await UserModel.find({}).select('username _id')
+        res.status(200).json({ users })
+    } catch (error) {
+        
+    }
 }
 
 const createUser = (req, res) => {

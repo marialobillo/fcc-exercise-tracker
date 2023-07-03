@@ -3,9 +3,10 @@ const app = express()
 const cors = require('cors')
 const port = 3000
 require('dotenv').config()
+const connectDB = require('./src/db/connection')
 
 const usersRouter = require('./src/routes/users')
-//const exercisesRouter = require('./src/routes/exercises')
+const exercisesRouter = require('./src/routes/exercises')
 
 app.use(cors())
 app.use(express.static('public'))
