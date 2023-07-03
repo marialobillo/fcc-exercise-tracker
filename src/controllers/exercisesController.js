@@ -17,8 +17,22 @@ const getAllExercises = async (req, res) => {
     }
 }
 
-const createExercise = (req, res) => {
-    res.send('Create exercise')
+const createExercise = async (req, res) => {
+    try {
+        const { userId } = req.body;
+        const user = await UserModel.findOne({ _id: userId })
+        const { duration, description, date } = req.body;
+        const exercise = await ExerciseModel.create({
+            username: user.username,
+            description,
+            duration,
+            date,
+        })
+        res.status(201).json({ exercise })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error })
+    }
 }
 
 const getExercisesByDate = (req, res) => {
