@@ -4,26 +4,27 @@ const UserModel = require('../models/User');
 
 const createExercise = async (req, res) => {
     try {
-        const { userId } = req.body;
-        const user = await UserModel.findOne({ _id: userId })       
+        const id = req.params._id;
         let { duration, description, date } = req.body;
-        if(!date){
-            date = new Date().toISOString().substring(0, 10)
+        const user = await UserModel.findOne({ _id: id })
+        if(!user) {
+            res.send('The user does not exist')
         }
         const exercise = await ExerciseModel.create({
             username: user.username,
             description,
             duration,
-            date,
+            date: date ? new Date(date) : new Date(),
+            userId: id,
         })
         res.status(201).json({ 
             username: user.username,
             description,
-            duration,
-            date,
-         })
+            duration: Number(duration),
+            date : new Date(exercise.date).toDateString(),
+            _id: id,
+        })
     } catch (error) {
-        console.log(error)
         res.status(500).json({ error })
     }
 }

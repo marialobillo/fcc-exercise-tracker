@@ -7,7 +7,7 @@ const {
 } = require('../controllers/exercisesController')
 
 
-router.route('/:id/exercises').post(createExercise)
-router.route('/:id/logs').get(getExercisesLogs)
+router.route('/:_id/exercises').post(createExercise)
+router.route('/:_id/logs').get(getExercisesLogs)
 
 module.exports = router

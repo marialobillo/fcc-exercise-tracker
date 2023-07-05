@@ -5,6 +5,9 @@ const ExerciseSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please provide a username'],
     },
+    userId: {
+        type: String,   
+    },
     description: {
         type: String,
         required: [true, 'Please provide a description'],
