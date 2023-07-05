@@ -5,17 +5,23 @@ const UserModel = require('../models/User');
 const createExercise = async (req, res) => {
     try {
         const { userId } = req.body;
-        console.log('userId', userId)
-        const user = await UserModel.findOne({ _id: userId })
-        console.log('user -> ', user)
-        const { duration, description, date } = req.body;
+        const user = await UserModel.findOne({ _id: userId })       
+        let { duration, description, date } = req.body;
+        if(!date){
+            date = new Date().toISOString().substring(0, 10)
+        }
         const exercise = await ExerciseModel.create({
             username: user.username,
             description,
             duration,
             date,
         })
-        res.status(201).json({ exercise })
+        res.status(201).json({ 
+            username: user.username,
+            description,
+            duration,
+            date,
+         })
     } catch (error) {
         console.log(error)
         res.status(500).json({ error })
