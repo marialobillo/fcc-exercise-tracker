@@ -2,8 +2,8 @@ const UserModel = require('../models/User');
 
 const getAllUsers = async (req, res) => {
     try {
-        const users = await UserModel.find().select('username _id')
-        res.status(200).json({ users })
+        const users = await UserModel.find({}).select('username _id')
+        res.status(200).json(users)
     } catch (error) {
         console.log(error)
         res.status(500).json({ error })
