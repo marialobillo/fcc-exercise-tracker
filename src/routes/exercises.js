@@ -3,13 +3,11 @@ const router = express.Router()
 
 const {
    createExercise,
-   getAllExercises,
-   getExercisesByDate, 
+   getExercisesLogs, 
 } = require('../controllers/exercisesController')
 
 
 router.route('/:id/exercises').post(createExercise)
-router.route('/:id/exercises').get(getAllExercises)
-//router.route('/:id/exercises').get(getExercisesByDate)
+router.route('/:id/logs').get(getExercisesLogs)
 
 module.exports = router
