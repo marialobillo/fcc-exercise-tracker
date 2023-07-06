@@ -5,7 +5,6 @@ const port = 3000
 const connectDB = require('./src/db/connection')
 require('dotenv').config()
 
-
 const usersRouter = require('./src/routes/users')
 const exercisesRouter = require('./src/routes/exercises')
 
@@ -21,7 +20,6 @@ app.use('/api/users/', exercisesRouter)
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
-
 
 const start = async () => {
   try {

@@ -62,7 +62,6 @@ const getExercisesLogs = async (req, res) => {
             log,
         })
     } catch (error) {
-        console.log(error)
         res.status(500).json({ error })
     }
 }
