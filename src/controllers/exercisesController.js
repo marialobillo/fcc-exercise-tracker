@@ -32,24 +32,34 @@ const createExercise = async (req, res) => {
 
 const getExercisesLogs = async (req, res) => {
     try {
-        const { id } = req.params;
+        const id = req.params._id;
         const { from, to, limit } = req.query;
         const user = await UserModel.findOne({ _id: id })
-        const logs = await ExerciseModel
-            .find({
-            username: user.username,
-            date: {
-                $gte: from,
-                $lte: to,
+        if(!user) {
+            return res.send('The user does not exist')
+        }
+        const filter = {
+            userId: id,
+        }
+        let dateFilter = {}
+        if(from && to) {
+            dateFilter = {
+                $gte: new Date(from),
+                $lte: new Date(to),
             }
-        })
-            .select('description duration date -_id')
-            .limit(limit)
+            filter.date = dateFilter
+        } 
+        const exercises = await ExerciseModel.find(filter).limit(+limit ?? 200)
+        const log = exercises.map(exercise => ({
+            description: exercise.description,
+            duration: exercise.duration,
+            date: exercise.date.toDateString(),
+        }))
         res.status(200).json({
             username: user.username,
-            count: logs.length,
+            count: log.length,
             _id: user.id,
-            log: logs,
+            log,
         })
     } catch (error) {
         console.log(error)
