@@ -5,17 +5,16 @@ const UserModel = require('../models/User');
 const createExercise = async (req, res) => {
     try {
         const id = req.params._id;
-        let { duration, description, date } = req.body;
+        const { duration, description, date } = req.body;
         const user = await UserModel.findOne({ _id: id })
         if(!user) {
             res.send('The user does not exist')
         }
         const exercise = await ExerciseModel.create({
-            username: user.username,
             description,
             duration,
             date: date ? new Date(date) : new Date(),
-            userId: id,
+            user_id: id,
         })
         res.status(201).json({ 
             username: user.username,
@@ -39,7 +38,7 @@ const getExercisesLogs = async (req, res) => {
             return res.send('The user does not exist')
         }
         const filter = {
-            userId: id,
+            user_id: id,
         }
         let dateFilter = {}
         if(from && to) {
